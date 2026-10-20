@@ -1,31 +1,50 @@
+#include <stdbool.h>
 #include <stdio.h>
 
-int main() {
-    int a, b, c;
-    int sum;
-    printf("Enter your score: ");
-    scanf("%d", &a);
-    printf("Enter your first exam score: ");
-    scanf("%d", &b);
-     printf("Enter your second exam score: ");
-    scanf("%d", &c);
-    sum = a+b+c;
-    if (sum >= 80) { 
-    printf("A"); 
-} else if (sum >= 75) { 
-    printf("B+"); 
-} else if (sum >= 70) { 
-    printf("B"); 
-} else if (sum >= 65) { 
-    printf("C+"); 
-} else if (sum >= 60) { 
-    printf("C"); 
-} else if (sum >= 55) { 
-    printf("D+"); 
-} else if (sum >= 50) { 
-    printf("D"); 
-} else { 
-    printf("F"); 
+void swap(int* xp, int* yp){
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
 }
+
+void bubbleSort(int arr[], int n){
+    int i, j;
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(&arr[j], &arr[j + 1]);
+            }
+        }
+		printf("\n");
+		printArray(arr, n);
+    }
+}
+
+void printArray(int arr[], int size){
+    int i;
+    for (i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+}
+void selectionSort(int arr[], int n) {
+	int i,j;
+    for (int i = 0; i < n - 1; i++) {
+        int min_idx = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+        swap(&arr[i],&arr[min_idx]);
+        printf("\n");
+		printArray(arr, n);
+    }
+}
+
+int main(){
+    int arr[] = { 64, 34, 25, 12, 22, 11, 90 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    bubbleSort(arr, n);
+    printf("Sorted arry: \n");
+    printArray(arr, n);
     return 0;
 }
